@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         // 추론적 표시
         val btn_result = findViewById<Button>(R.id.btn_result)
 
-        // 람다식으로 치환하여 사용 {} 자바는 ()을 쓰는 전통적인 방식
+        // 람다식으로 치환하여 {} 사용  자바는 ()을 쓰는 전통적인 방식
         btn_result.setOnClickListener{
             Log.d("MainActivity", "btn_result 버튼이 클릭되었습니다.")
 
-
+            // null 체크를 하지 않으면 익셉션이 뜨면서 앱이 강제 종료 됨.
             if (et_height.text.isEmpty() || et_weight.text.isEmpty()) {
                 Toast.makeText(this, "빈 값이 있어요.", Toast.LENGTH_SHORT).show()
 
@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
 
             // 매개변수는 (넘어가기 전 클래스, 넘어갈 클래스::class.java) 자바의 클래스.class와 같다.
             val intent = Intent(this, ResultActivity::class.java)
+
+            intent.putExtra("height", height)
+            intent.putExtra("weight", weight)
+
             startActivity(intent)
 
         }
